@@ -49,29 +49,39 @@ import { getList } from '@/api/table'
 export default {
   filters: {
     statusFilter(status) {
+	console.debug(`>>> Entering statusFilter(status=${status})`);
       const statusMap = {
         published: 'success',
         draft: 'gray',
         deleted: 'danger'
       }
+	console.debug(`<<< Exiting statusFilter(status=${status})`);
       return statusMap[status]
     }
   },
   data() {
+	console.debug('>>> Entering data()');
     return {
       list: null,
       listLoading: true
     }
+	console.debug('<<< Exiting data()');
   },
   created() {
+	console.debug('>>> Entering created()');
     this.fetchData()
+	console.debug('<<< Exiting created()');
   },
   methods: {
     fetchData() {
+	console.debug('>>> Entering fetchData()');
       this.listLoading = true
       getList().then(response => {
+		logger.debug(`fetchData(): this.listLoading → ${this.listLoading}`);
         this.list = response.data.items
+		logger.debug(`fetchData(): this.list → ${this.list}`);
         this.listLoading = false
+		console.debug('<<< Exiting fetchData()');
       })
     }
   }

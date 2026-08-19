@@ -51,19 +51,24 @@ export default {
     }
   },
   data() {
+	console.debug('>>> Entering data()');
     // To fix https://github.com/PanJiaChen/vue-admin-template/issues/237
     // TODO: refactor with render function
     this.onlyOneChild = null
+	logger.debug(`data(): this.onlyOneChild → ${this.onlyOneChild}`);
+	console.debug('<<< Exiting data()');
     return {}
   },
   methods: {
     hasOneShowingChild(children = [], parent) {
+	console.debug(`>>> Entering hasOneShowingChild(children=${children},parent=${parent})`);
       const showingChildren = children.filter(item => {
         if (item.hidden) {
           return false
         } else {
           // Temp set(will be used if only has one showing child)
           this.onlyOneChild = item
+		logger.debug(`hasOneShowingChild(children=${children},parent=${parent}): this.onlyOneChild → ${this.onlyOneChild}`);
           return true
         }
       })
@@ -79,15 +84,18 @@ export default {
         return true
       }
 
+	console.debug(`<<< Exiting hasOneShowingChild(children=${children},parent=${parent})`);
       return false
     },
     resolvePath(routePath) {
+	console.debug(`>>> Entering resolvePath(routePath=${routePath})`);
       if (isExternal(routePath)) {
         return routePath
       }
       if (isExternal(this.basePath)) {
         return this.basePath
       }
+	console.debug(`<<< Exiting resolvePath(routePath=${routePath})`);
       return path.resolve(this.basePath, routePath)
     }
   }
