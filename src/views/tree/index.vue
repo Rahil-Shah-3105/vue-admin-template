@@ -18,6 +18,7 @@
 export default {
 
   data() {
+	console.debug('>>> Entering data()');
     return {
       filterText: '',
       data2: [{
@@ -60,16 +61,21 @@ export default {
         label: 'label'
       }
     }
+	console.debug('<<< Exiting data()');
   },
   watch: {
     filterText(val) {
+	console.debug(`>>> Entering filterText(val=${val})`);
       this.$refs.tree2.filter(val)
+	console.debug(`<<< Exiting filterText(val=${val})`);
     }
   },
 
   methods: {
     filterNode(value, data) {
+	console.debug(`>>> Entering filterNode(value=${value},data=${data})`);
       if (!value) return true
+	console.debug(`<<< Exiting filterNode(value=${value},data=${data})`);
       return data.label.indexOf(value) !== -1
     }
   }

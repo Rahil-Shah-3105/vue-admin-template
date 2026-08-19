@@ -1,3 +1,4 @@
+const logger = console;
 const chokidar = require('chokidar')
 const bodyParser = require('body-parser')
 const chalk = require('chalk')
@@ -7,6 +8,7 @@ const Mock = require('mockjs')
 const mockDir = path.join(process.cwd(), 'mock')
 
 function registerRoutes(app) {
+logger.debug(`>>> Entering registerRoutes(app=${app})`);
   let mockLastIndex
   const { mocks } = require('./index.js')
   const mocksForServer = mocks.map(route => {
@@ -21,29 +23,36 @@ function registerRoutes(app) {
     mockRoutesLength: mockRoutesLength,
     mockStartIndex: mockLastIndex - mockRoutesLength
   }
+logger.debug(`<<< Exiting registerRoutes(app=${app})`);
 }
 
 function unregisterRoutes() {
+logger.debug('>>> Entering unregisterRoutes()');
   Object.keys(require.cache).forEach(i => {
     if (i.includes(mockDir)) {
       delete require.cache[require.resolve(i)]
+	logger.debug('<<< Exiting unregisterRoutes()');
     }
   })
 }
 
 // for mock server
 const responseFake = (url, type, respond) => {
+logger.debug(`>>> Entering responseFake(url=${url},type=${type},respond=${respond})`);
   return {
     url: new RegExp(`${process.env.VUE_APP_BASE_API}${url}`),
     type: type || 'get',
     response(req, res) {
+	logger.debug(`>>> Entering response(req=${req},res=${res})`);
       console.log('request invoke:' + req.path)
       res.json(Mock.mock(respond instanceof Function ? respond(req, res) : respond))
+	logger.debug(`<<< Exiting response(req=${req},res=${res})`);
     }
   }
 }
 
 module.exports = app => {
+logger.debug(`>>> Entering moduleExport(app=${app})`);
   // parse app.body
   // https://expressjs.com/en/4x/api.html#req.body
   app.use(bodyParser.json())
@@ -76,6 +85,7 @@ module.exports = app => {
       } catch (error) {
         console.log(chalk.redBright(error))
       }
+		logger.debug(`<<< Exiting moduleExport(app=${app})`);
     }
   })
 }

@@ -50,6 +50,7 @@
 <script>
 export default {
   data() {
+	console.debug('>>> Entering data()');
     return {
       form: {
         name: '',
@@ -62,16 +63,21 @@ export default {
         desc: ''
       }
     }
+	console.debug('<<< Exiting data()');
   },
   methods: {
     onSubmit() {
+	console.debug('>>> Entering onSubmit()');
       this.$message('submit!')
+	console.debug('<<< Exiting onSubmit()');
     },
     onCancel() {
+	console.debug('>>> Entering onCancel()');
       this.$message({
         message: 'cancel!',
         type: 'warning'
       })
+	console.debug('<<< Exiting onCancel()');
     }
   }
 }
