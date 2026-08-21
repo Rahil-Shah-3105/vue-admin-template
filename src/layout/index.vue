@@ -25,26 +25,36 @@ export default {
   mixins: [ResizeMixin],
   computed: {
     sidebar() {
+	console.debug('>>> Entering sidebar()');
+	console.debug('<<< Exiting sidebar()');
       return this.$store.state.app.sidebar
     },
     device() {
+	console.debug('>>> Entering device()');
+	console.debug('<<< Exiting device()');
       return this.$store.state.app.device
     },
     fixedHeader() {
+	console.debug('>>> Entering fixedHeader()');
+	console.debug('<<< Exiting fixedHeader()');
       return this.$store.state.settings.fixedHeader
     },
     classObj() {
+	console.debug('>>> Entering classObj()');
       return {
         hideSidebar: !this.sidebar.opened,
         openSidebar: this.sidebar.opened,
         withoutAnimation: this.sidebar.withoutAnimation,
         mobile: this.device === 'mobile'
       }
+	console.debug('<<< Exiting classObj()');
     }
   },
   methods: {
     handleClickOutside() {
+	console.debug('>>> Entering handleClickOutside()');
       this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
+	console.debug('<<< Exiting handleClickOutside()');
     }
   }
 }

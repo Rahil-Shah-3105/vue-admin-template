@@ -11,6 +11,8 @@ export default {
   name: 'AppMain',
   computed: {
     key() {
+	console.debug('>>> Entering key()');
+	console.debug('<<< Exiting key()');
       return this.$route.path
     }
   }

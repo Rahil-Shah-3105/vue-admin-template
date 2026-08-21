@@ -49,11 +49,15 @@ export default {
   },
   methods: {
     toggleSideBar() {
+	console.debug('>>> Entering toggleSideBar()');
       this.$store.dispatch('app/toggleSideBar')
+	console.debug('<<< Exiting toggleSideBar()');
     },
     async logout() {
+	console.debug('>>> Entering logout()');
       await this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+	console.debug('<<< Exiting logout()');
     }
   }
 }

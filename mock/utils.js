@@ -1,10 +1,13 @@
+const logger = console;
 /**
  * @param {string} url
  * @returns {Object}
  */
 function param2Obj(url) {
+logger.debug(`>>> Entering param2Obj(url=${url})`);
   const search = decodeURIComponent(url.split('?')[1]).replace(/\+/g, ' ')
   if (!search) {
+	logger.debug(`param2Obj(url=${url}): search → ${search}`);
     return {}
   }
   const obj = {}
@@ -17,6 +20,7 @@ function param2Obj(url) {
       obj[name] = val
     }
   })
+logger.debug(`param2Obj(url=${url}): searchArr → ${searchArr}`);
   return obj
 }
 

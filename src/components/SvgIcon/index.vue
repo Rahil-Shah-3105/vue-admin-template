@@ -23,23 +23,31 @@ export default {
   },
   computed: {
     isExternal() {
+	console.debug('>>> Entering isExternal()');
+	console.debug('<<< Exiting isExternal()');
       return isExternal(this.iconClass)
     },
     iconName() {
+	console.debug('>>> Entering iconName()');
+	console.debug('<<< Exiting iconName()');
       return `#icon-${this.iconClass}`
     },
     svgClass() {
+	console.debug('>>> Entering svgClass()');
       if (this.className) {
         return 'svg-icon ' + this.className
       } else {
+	console.debug('<<< Exiting svgClass()');
         return 'svg-icon'
       }
     },
     styleExternalIcon() {
+	console.debug('>>> Entering styleExternalIcon()');
       return {
         mask: `url(${this.iconClass}) no-repeat 50% 50%`,
         '-webkit-mask': `url(${this.iconClass}) no-repeat 50% 50%`
       }
+	console.debug('<<< Exiting styleExternalIcon()');
     }
   }
 }
