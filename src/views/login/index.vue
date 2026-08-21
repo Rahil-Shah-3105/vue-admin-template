@@ -58,19 +58,25 @@ import { validUsername } from '@/utils/validate'
 export default {
   name: 'Login',
   data() {
+	console.debug('>>> Entering data()');
     const validateUsername = (rule, value, callback) => {
+	console.debug(`>>> Entering validateUsername(rule=${rule},value=${value},callback=${callback})`);
       if (!validUsername(value)) {
         callback(new Error('Please enter the correct user name'))
       } else {
         callback()
       }
+	console.debug(`<<< Exiting validateUsername(rule=${rule},value=${value},callback=${callback})`);
     }
     const validatePassword = (rule, value, callback) => {
+	console.debug(`>>> Entering validatePassword(rule=${rule},value=${value},callback=${callback})`);
       if (value.length < 6) {
+		console.debug(`data(): validateUsername → ${validateUsername}`);
         callback(new Error('The password can not be less than 6 digits'))
       } else {
         callback()
       }
+	console.debug(`<<< Exiting validatePassword(rule=${rule},value=${value},callback=${callback})`);
     }
     return {
       loginForm: {
@@ -89,26 +95,33 @@ export default {
   watch: {
     $route: {
       handler: function(route) {
+		console.debug(`>>> Entering handler(route=${route})`);
         this.redirect = route.query && route.query.redirect
+		logger.debug(`handler(route=${route}): this.redirect → ${this.redirect}`);
       },
       immediate: true
     }
   },
   methods: {
     showPwd() {
+	console.debug('>>> Entering showPwd()');
       if (this.passwordType === 'password') {
         this.passwordType = ''
+		logger.debug(`showPwd(): this.passwordType → ${this.passwordType}`);
       } else {
         this.passwordType = 'password'
       }
       this.$nextTick(() => {
         this.$refs.password.focus()
       })
+		console.debug('<<< Exiting showPwd()');
     },
     handleLogin() {
+	console.debug('>>> Entering handleLogin()');
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
+		logger.debug(`handleLogin(): this.loading → ${this.loading}`);
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || '/' })
             this.loading = false
@@ -117,6 +130,7 @@ export default {
           })
         } else {
           console.log('error submit!!')
+		console.debug('<<< Exiting handleLogin()');
           return false
         }
       })

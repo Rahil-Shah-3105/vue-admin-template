@@ -24,7 +24,9 @@ export default {
   },
   methods: {
     toggleClick() {
+	console.debug('>>> Entering toggleClick()');
       this.$emit('toggleClick')
+	console.debug('<<< Exiting toggleClick()');
     }
   }
 }

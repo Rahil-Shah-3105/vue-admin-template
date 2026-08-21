@@ -26,6 +26,8 @@ export default {
   name: 'Page404',
   computed: {
     message() {
+	console.debug('>>> Entering message()');
+	console.debug('<<< Exiting message()');
       return 'The webmaster said that you can not enter this page...'
     }
   }

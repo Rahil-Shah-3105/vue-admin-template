@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Created by PanJiaChen on 16/11/18.
  */
@@ -9,11 +10,13 @@
  * @returns {string | null}
  */
 export function parseTime(time, cFormat) {
+logger.debug(`>>> Entering parseTime(time=${time},cFormat=${cFormat})`);
   if (arguments.length === 0 || !time) {
     return null
   }
   const format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}'
   let date
+logger.debug(`parseTime(time=${time},cFormat=${cFormat}): format → ${format}`);
   if (typeof time === 'object') {
     date = time
   } else {
@@ -48,6 +51,7 @@ export function parseTime(time, cFormat) {
     if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value ] }
     return value.toString().padStart(2, '0')
   })
+logger.debug(`parseTime(time=${time},cFormat=${cFormat}): time_str → ${time_str}`);
   return time_str
 }
 
@@ -57,6 +61,7 @@ export function parseTime(time, cFormat) {
  * @returns {string}
  */
 export function formatTime(time, option) {
+logger.debug(`>>> Entering formatTime(time=${time},option=${option})`);
   if (('' + time).length === 10) {
     time = parseInt(time) * 1000
   } else {
@@ -65,7 +70,10 @@ export function formatTime(time, option) {
   const d = new Date(time)
   const now = Date.now()
 
+logger.debug(`formatTime(time=${time},option=${option}): d → ${d}`);
+logger.debug(`formatTime(time=${time},option=${option}): now → ${now}`);
   const diff = (now - d) / 1000
+logger.debug(`formatTime(time=${time},option=${option}): diff → ${diff}`);
 
   if (diff < 30) {
     return '刚刚'
@@ -80,6 +88,7 @@ export function formatTime(time, option) {
   if (option) {
     return parseTime(time, option)
   } else {
+	logger.debug(`<<< Exiting formatTime(time=${time},option=${option})`);
     return (
       d.getMonth() +
       1 +
@@ -99,8 +108,10 @@ export function formatTime(time, option) {
  * @returns {Object}
  */
 export function param2Obj(url) {
+logger.debug(`>>> Entering param2Obj(url=${url})`);
   const search = decodeURIComponent(url.split('?')[1]).replace(/\+/g, ' ')
   if (!search) {
+	logger.debug(`param2Obj(url=${url}): search → ${search}`);
     return {}
   }
   const obj = {}
@@ -113,5 +124,6 @@ export function param2Obj(url) {
       obj[name] = val
     }
   })
+logger.debug(`param2Obj(url=${url}): searchArr → ${searchArr}`);
   return obj
 }

@@ -31,24 +31,34 @@ export default {
       'sidebar'
     ]),
     routes() {
+	console.debug('>>> Entering routes()');
+	console.debug('<<< Exiting routes()');
       return this.$router.options.routes
     },
     activeMenu() {
+	console.debug('>>> Entering activeMenu()');
       const route = this.$route
       const { meta, path } = route
       // if set path, the sidebar will highlight the path you set
       if (meta.activeMenu) {
         return meta.activeMenu
       }
+	console.debug('<<< Exiting activeMenu()');
       return path
     },
     showLogo() {
+	console.debug('>>> Entering showLogo()');
+	console.debug('<<< Exiting showLogo()');
       return this.$store.state.settings.sidebarLogo
     },
     variables() {
+	console.debug('>>> Entering variables()');
+	console.debug('<<< Exiting variables()');
       return variables
     },
     isCollapse() {
+	console.debug('>>> Entering isCollapse()');
+	console.debug('<<< Exiting isCollapse()');
       return !this.sidebar.opened
     }
   }
