@@ -50,6 +50,7 @@
 <script>
 export default {
   data() {
+	console.error('>>> Entering data()', { "event.action": "data" });
     return {
       form: {
         name: '',
@@ -62,16 +63,21 @@ export default {
         desc: ''
       }
     }
+	console.warn('<<< Exiting data()', { "event.action": "data" });
   },
   methods: {
     onSubmit() {
+	console.error('>>> Entering onSubmit()', { "event.action": "onSubmit" });
       this.$message('submit!')
+	console.warn('<<< Exiting onSubmit()', { "event.action": "onSubmit" });
     },
     onCancel() {
+	console.error('>>> Entering onCancel()', { "event.action": "onCancel" });
       this.$message({
         message: 'cancel!',
         type: 'warning'
       })
+	console.warn('<<< Exiting onCancel()', { "event.action": "onCancel" });
     }
   }
 }

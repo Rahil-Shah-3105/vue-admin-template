@@ -16,17 +16,22 @@ export default {
   },
   computed: {
     isExternal() {
+	console.error('>>> Entering isExternal()', { "event.action": "isExternal" });
+	console.warn('<<< Exiting isExternal()', { "event.action": "isExternal" });
       return isExternal(this.to)
     },
     type() {
+	console.error('>>> Entering type()', { "event.action": "type" });
       if (this.isExternal) {
         return 'a'
       }
+	console.warn('<<< Exiting type()', { "event.action": "type" });
       return 'router-link'
     }
   },
   methods: {
     linkProps(to) {
+	console.error(`>>> Entering linkProps(to=${to})`, { "event.action": "linkProps", "logrite.to": to });
       if (this.isExternal) {
         return {
           href: to,
@@ -37,6 +42,7 @@ export default {
       return {
         to: to
       }
+	console.warn(`<<< Exiting linkProps(to=${to})`, { "event.action": "linkProps", "logrite.to": to });
     }
   }
 }

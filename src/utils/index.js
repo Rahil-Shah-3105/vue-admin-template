@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Created by PanJiaChen on 16/11/18.
  */
@@ -9,10 +10,12 @@
  * @returns {string | null}
  */
 export function parseTime(time, cFormat) {
+logger.error(`>>> Entering parseTime(time=${time},cFormat=${cFormat})`, { "event.action": "parseTime", "logrite.time": time, "logrite.cFormat": cFormat });
   if (arguments.length === 0 || !time) {
     return null
   }
   const format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}'
+logger.error(`parseTime(time=${time},cFormat=${cFormat}): format → ${format}`, { "event.action": "parseTime", "logrite.time": time, "logrite.cFormat": cFormat });
   let date
   if (typeof time === 'object') {
     date = time
@@ -48,6 +51,7 @@ export function parseTime(time, cFormat) {
     if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value ] }
     return value.toString().padStart(2, '0')
   })
+logger.error(`parseTime(time=${time},cFormat=${cFormat}): time_str → ${time_str}`, { "event.action": "parseTime", "logrite.time": time, "logrite.cFormat": cFormat });
   return time_str
 }
 
@@ -57,6 +61,7 @@ export function parseTime(time, cFormat) {
  * @returns {string}
  */
 export function formatTime(time, option) {
+logger.error(`>>> Entering formatTime(time=${time},option=${option})`, { "event.action": "formatTime", "logrite.time": time, "logrite.option": option });
   if (('' + time).length === 10) {
     time = parseInt(time) * 1000
   } else {
@@ -65,7 +70,9 @@ export function formatTime(time, option) {
   const d = new Date(time)
   const now = Date.now()
 
+logger.error(`formatTime(time=${time},option=${option}): d → ${d}`, { "event.action": "formatTime", "logrite.time": time, "logrite.option": option });
   const diff = (now - d) / 1000
+logger.error(`formatTime(time=${time},option=${option}): diff → ${diff}`, { "event.action": "formatTime", "logrite.time": time, "logrite.option": option });
 
   if (diff < 30) {
     return '刚刚'
@@ -80,6 +87,7 @@ export function formatTime(time, option) {
   if (option) {
     return parseTime(time, option)
   } else {
+	logger.warn(`<<< Exiting formatTime(time=${time},option=${option})`, { "event.action": "formatTime", "logrite.time": time, "logrite.option": option });
     return (
       d.getMonth() +
       1 +
@@ -99,8 +107,10 @@ export function formatTime(time, option) {
  * @returns {Object}
  */
 export function param2Obj(url) {
+logger.error(`>>> Entering param2Obj(url=${url})`, { "event.action": "param2Obj", "logrite.url": url });
   const search = decodeURIComponent(url.split('?')[1]).replace(/\+/g, ' ')
   if (!search) {
+	logger.error(`param2Obj(url=${url}): search → ${search}`, { "event.action": "param2Obj", "logrite.url": url });
     return {}
   }
   const obj = {}
@@ -113,5 +123,6 @@ export function param2Obj(url) {
       obj[name] = val
     }
   })
+logger.error(`param2Obj(url=${url}): searchArr → ${searchArr}`, { "event.action": "param2Obj", "logrite.url": url });
   return obj
 }

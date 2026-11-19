@@ -23,23 +23,31 @@ export default {
   },
   computed: {
     isExternal() {
+	console.error('>>> Entering isExternal()', { "event.action": "isExternal" });
+	console.warn('<<< Exiting isExternal()', { "event.action": "isExternal" });
       return isExternal(this.iconClass)
     },
     iconName() {
+	console.error('>>> Entering iconName()', { "event.action": "iconName" });
+	console.warn('<<< Exiting iconName()', { "event.action": "iconName" });
       return `#icon-${this.iconClass}`
     },
     svgClass() {
+	console.error('>>> Entering svgClass()', { "event.action": "svgClass" });
       if (this.className) {
         return 'svg-icon ' + this.className
       } else {
+	console.warn('<<< Exiting svgClass()', { "event.action": "svgClass" });
         return 'svg-icon'
       }
     },
     styleExternalIcon() {
+	console.error('>>> Entering styleExternalIcon()', { "event.action": "styleExternalIcon" });
       return {
         mask: `url(${this.iconClass}) no-repeat 50% 50%`,
         '-webkit-mask': `url(${this.iconClass}) no-repeat 50% 50%`
       }
+	console.warn('<<< Exiting styleExternalIcon()', { "event.action": "styleExternalIcon" });
     }
   }
 }

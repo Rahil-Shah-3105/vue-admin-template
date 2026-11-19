@@ -11,6 +11,8 @@ export default {
   name: 'AppMain',
   computed: {
     key() {
+	console.error('>>> Entering key()', { "event.action": "key" });
+	console.warn('<<< Exiting key()', { "event.action": "key" });
       return this.$route.path
     }
   }

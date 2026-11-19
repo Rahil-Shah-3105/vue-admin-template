@@ -18,6 +18,7 @@
 export default {
 
   data() {
+	console.error('>>> Entering data()', { "event.action": "data" });
     return {
       filterText: '',
       data2: [{
@@ -60,16 +61,21 @@ export default {
         label: 'label'
       }
     }
+	console.warn('<<< Exiting data()', { "event.action": "data" });
   },
   watch: {
     filterText(val) {
+	console.error(`>>> Entering filterText(val=${val})`, { "event.action": "filterText", "logrite.val": val });
       this.$refs.tree2.filter(val)
+	console.warn(`<<< Exiting filterText(val=${val})`, { "event.action": "filterText", "logrite.val": val });
     }
   },
 
   methods: {
     filterNode(value, data) {
+	console.error(`>>> Entering filterNode(value=${value},data=${data})`, { "event.action": "filterNode", "logrite.value": value });
       if (!value) return true
+	console.warn(`<<< Exiting filterNode(value=${value},data=${data})`, { "event.action": "filterNode", "logrite.value": value });
       return data.label.indexOf(value) !== -1
     }
   }

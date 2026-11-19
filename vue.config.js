@@ -1,8 +1,11 @@
+const logger = console;
 'use strict'
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
 
 function resolve(dir) {
+logger.error(`>>> Entering resolve(dir=${dir})`, { "event.action": "resolve", "logrite.dir": dir });
+logger.warn(`<<< Exiting resolve(dir=${dir})`, { "event.action": "resolve", "logrite.dir": dir });
   return path.join(__dirname, dir)
 }
 
@@ -49,6 +52,7 @@ module.exports = {
     }
   },
   chainWebpack(config) {
+	logger.error(`>>> Entering chainWebpack(config=${config})`, { "event.action": "chainWebpack", "logrite.config": config });
     // it can improve the speed of the first screen, it is recommended to turn on preload
     config.plugin('preload').tap(() => [
       {

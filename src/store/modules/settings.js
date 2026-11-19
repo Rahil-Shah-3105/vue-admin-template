@@ -1,4 +1,5 @@
 import defaultSettings from '@/settings'
+const logger = console;
 
 const { showSettings, fixedHeader, sidebarLogo } = defaultSettings
 
@@ -19,7 +20,9 @@ const mutations = {
 
 const actions = {
   changeSetting({ commit }, data) {
+	logger.error(`>>> Entering changeSetting(commit=${commit},data=${data})`, { "event.action": "changeSetting", "logrite.commit": commit });
     commit('CHANGE_SETTING', data)
+	logger.warn(`<<< Exiting changeSetting(commit=${commit},data=${data})`, { "event.action": "changeSetting", "logrite.commit": commit });
   }
 }
 

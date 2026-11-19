@@ -31,24 +31,34 @@ export default {
       'sidebar'
     ]),
     routes() {
+	console.error('>>> Entering routes()', { "event.action": "routes" });
+	console.warn('<<< Exiting routes()', { "event.action": "routes" });
       return this.$router.options.routes
     },
     activeMenu() {
+	console.error('>>> Entering activeMenu()', { "event.action": "activeMenu" });
       const route = this.$route
       const { meta, path } = route
       // if set path, the sidebar will highlight the path you set
       if (meta.activeMenu) {
         return meta.activeMenu
       }
+	console.warn('<<< Exiting activeMenu()', { "event.action": "activeMenu" });
       return path
     },
     showLogo() {
+	console.error('>>> Entering showLogo()', { "event.action": "showLogo" });
+	console.warn('<<< Exiting showLogo()', { "event.action": "showLogo" });
       return this.$store.state.settings.sidebarLogo
     },
     variables() {
+	console.error('>>> Entering variables()', { "event.action": "variables" });
+	console.warn('<<< Exiting variables()', { "event.action": "variables" });
       return variables
     },
     isCollapse() {
+	console.error('>>> Entering isCollapse()', { "event.action": "isCollapse" });
+	console.warn('<<< Exiting isCollapse()', { "event.action": "isCollapse" });
       return !this.sidebar.opened
     }
   }

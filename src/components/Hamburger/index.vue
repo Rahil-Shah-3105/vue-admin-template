@@ -24,7 +24,9 @@ export default {
   },
   methods: {
     toggleClick() {
+	console.error('>>> Entering toggleClick()', { "event.action": "toggleClick" });
       this.$emit('toggleClick')
+	console.warn('<<< Exiting toggleClick()', { "event.action": "toggleClick" });
     }
   }
 }

@@ -49,11 +49,15 @@ export default {
   },
   methods: {
     toggleSideBar() {
+	console.error('>>> Entering toggleSideBar()', { "event.action": "toggleSideBar" });
       this.$store.dispatch('app/toggleSideBar')
+	console.warn('<<< Exiting toggleSideBar()', { "event.action": "toggleSideBar" });
     },
     async logout() {
+	console.error('>>> Entering logout()', { "event.action": "logout" });
       await this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+	console.warn('<<< Exiting logout()', { "event.action": "logout" });
     }
   }
 }

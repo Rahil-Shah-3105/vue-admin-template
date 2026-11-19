@@ -51,19 +51,24 @@ export default {
     }
   },
   data() {
+	console.error('>>> Entering data()', { "event.action": "data" });
     // To fix https://github.com/PanJiaChen/vue-admin-template/issues/237
     // TODO: refactor with render function
     this.onlyOneChild = null
+	logger.debug(`data(): this.onlyOneChild → ${this.onlyOneChild}`, { "event.action": "data" });
+	console.warn('<<< Exiting data()', { "event.action": "data" });
     return {}
   },
   methods: {
     hasOneShowingChild(children = [], parent) {
+	console.error(`>>> Entering hasOneShowingChild(children=${children},parent=${parent})`, { "event.action": "hasOneShowingChild", "logrite.children": children });
       const showingChildren = children.filter(item => {
         if (item.hidden) {
           return false
         } else {
           // Temp set(will be used if only has one showing child)
           this.onlyOneChild = item
+		logger.debug(`hasOneShowingChild(children=${children},parent=${parent}): this.onlyOneChild → ${this.onlyOneChild}`, { "event.action": "hasOneShowingChild", "logrite.children": children });
           return true
         }
       })
@@ -79,15 +84,18 @@ export default {
         return true
       }
 
+	console.warn(`<<< Exiting hasOneShowingChild(children=${children},parent=${parent})`, { "event.action": "hasOneShowingChild", "logrite.children": children });
       return false
     },
     resolvePath(routePath) {
+	console.error(`>>> Entering resolvePath(routePath=${routePath})`, { "event.action": "resolvePath", "logrite.routePath": routePath });
       if (isExternal(routePath)) {
         return routePath
       }
       if (isExternal(this.basePath)) {
         return this.basePath
       }
+	console.warn(`<<< Exiting resolvePath(routePath=${routePath})`, { "event.action": "resolvePath", "logrite.routePath": routePath });
       return path.resolve(this.basePath, routePath)
     }
   }

@@ -25,26 +25,36 @@ export default {
   mixins: [ResizeMixin],
   computed: {
     sidebar() {
+	console.error('>>> Entering sidebar()', { "event.action": "sidebar" });
+	console.warn('<<< Exiting sidebar()', { "event.action": "sidebar" });
       return this.$store.state.app.sidebar
     },
     device() {
+	console.error('>>> Entering device()', { "event.action": "device" });
+	console.warn('<<< Exiting device()', { "event.action": "device" });
       return this.$store.state.app.device
     },
     fixedHeader() {
+	console.error('>>> Entering fixedHeader()', { "event.action": "fixedHeader" });
+	console.warn('<<< Exiting fixedHeader()', { "event.action": "fixedHeader" });
       return this.$store.state.settings.fixedHeader
     },
     classObj() {
+	console.error('>>> Entering classObj()', { "event.action": "classObj" });
       return {
         hideSidebar: !this.sidebar.opened,
         openSidebar: this.sidebar.opened,
         withoutAnimation: this.sidebar.withoutAnimation,
         mobile: this.device === 'mobile'
       }
+	console.warn('<<< Exiting classObj()', { "event.action": "classObj" });
     }
   },
   methods: {
     handleClickOutside() {
+	console.error('>>> Entering handleClickOutside()', { "event.action": "handleClickOutside" });
       this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
+	console.warn('<<< Exiting handleClickOutside()', { "event.action": "handleClickOutside" });
     }
   }
 }

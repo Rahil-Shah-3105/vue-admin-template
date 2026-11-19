@@ -5,6 +5,7 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
+const logger = console;
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -174,8 +175,10 @@ const router = createRouter()
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter() {
+logger.error('>>> Entering resetRouter()', { "event.action": "resetRouter" });
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router
+logger.error(`resetRouter(): newRouter → ${newRouter}`, { "event.action": "resetRouter" });
 }
 
 export default router

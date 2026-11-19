@@ -23,10 +23,12 @@ export default {
     }
   },
   data() {
+	console.error('>>> Entering data()', { "event.action": "data" });
     return {
       title: 'Vue Admin Template',
       logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
     }
+	console.warn('<<< Exiting data()', { "event.action": "data" });
   }
 }
 </script>

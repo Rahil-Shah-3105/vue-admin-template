@@ -58,14 +58,18 @@ import { validUsername } from '@/utils/validate'
 export default {
   name: 'Login',
   data() {
+	console.error('>>> Entering data()', { "event.action": "data" });
     const validateUsername = (rule, value, callback) => {
+	console.error(`>>> Entering validateUsername(rule=${rule},value=${value},callback=${callback})`, { "event.action": "validateUsername", "logrite.rule": rule, "logrite.value": value, "logrite.callback": callback });
       if (!validUsername(value)) {
         callback(new Error('Please enter the correct user name'))
       } else {
         callback()
       }
+	console.warn(`<<< Exiting validateUsername(rule=${rule},value=${value},callback=${callback})`, { "event.action": "validateUsername", "logrite.rule": rule, "logrite.value": value, "logrite.callback": callback });
     }
     const validatePassword = (rule, value, callback) => {
+	console.error(`data(): validateUsername → ${validateUsername}`, { "event.action": "data" });
       if (value.length < 6) {
         callback(new Error('The password can not be less than 6 digits'))
       } else {
@@ -89,34 +93,43 @@ export default {
   watch: {
     $route: {
       handler: function(route) {
+		console.error(`>>> Entering handler(route=${route})`, { "event.action": "handler", "logrite.route": route });
         this.redirect = route.query && route.query.redirect
+		logger.debug(`handler(route=${route}): this.redirect → ${this.redirect}`, { "event.action": "handler", "logrite.route": route });
       },
       immediate: true
     }
   },
   methods: {
     showPwd() {
+	console.error('>>> Entering showPwd()', { "event.action": "showPwd" });
       if (this.passwordType === 'password') {
         this.passwordType = ''
+		logger.debug(`showPwd(): this.passwordType → ${this.passwordType}`, { "event.action": "showPwd" });
       } else {
         this.passwordType = 'password'
       }
       this.$nextTick(() => {
         this.$refs.password.focus()
       })
+		console.warn('<<< Exiting showPwd()', { "event.action": "showPwd" });
     },
     handleLogin() {
+	console.error('>>> Entering handleLogin()', { "event.action": "handleLogin" });
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
+		logger.debug(`handleLogin(): this.loading → ${this.loading}`, { "event.action": "handleLogin" });
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || '/' })
             this.loading = false
           }).catch(() => {
+			console.error('Exception in handleLogin()', { "event.action": "handleLogin", "event.category": "process" });
             this.loading = false
           })
         } else {
           console.log('error submit!!')
+		console.warn('<<< Exiting handleLogin()', { "event.action": "handleLogin" });
           return false
         }
       })
