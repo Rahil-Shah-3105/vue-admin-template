@@ -96,6 +96,7 @@ export default {
 		console.error(`>>> Entering handler(route=${route})`, { "event.action": "handler", "logrite.route": route });
         this.redirect = route.query && route.query.redirect
 		logger.debug(`handler(route=${route}): this.redirect → ${this.redirect}`, { "event.action": "handler", "logrite.route": route });
+		console.warn(`<<< Exiting handler(route=${route})`, { "event.action": "handler", "logrite.route": route });
       },
       immediate: true
     }

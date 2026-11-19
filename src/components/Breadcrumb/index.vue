@@ -63,6 +63,7 @@ export default {
       const { params } = this.$route
       var toPath = pathToRegexp.compile(path)
 	console.error(`pathCompile(path=${path}): toPath → ${toPath}`, { "event.action": "pathCompile", "logrite.path": path });
+	console.warn(`<<< Exiting pathCompile(path=${path})`, { "event.action": "pathCompile", "logrite.path": path });
       return toPath(params)
     },
     handleLink(item) {

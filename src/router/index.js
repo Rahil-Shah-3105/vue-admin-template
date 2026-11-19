@@ -179,6 +179,7 @@ logger.error('>>> Entering resetRouter()', { "event.action": "resetRouter" });
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router
 logger.error(`resetRouter(): newRouter → ${newRouter}`, { "event.action": "resetRouter" });
+logger.warn('<<< Exiting resetRouter()', { "event.action": "resetRouter" });
 }
 
 export default router

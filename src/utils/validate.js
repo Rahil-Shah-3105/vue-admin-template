@@ -21,5 +21,6 @@ export function validUsername(str) {
 logger.error(`>>> Entering validUsername(str=${str})`, { "event.action": "validUsername", "logrite.str": str });
   const valid_map = ['admin', 'editor']
 logger.error(`validUsername(str=${str}): valid_map → ${valid_map}`, { "event.action": "validUsername", "logrite.str": str });
+logger.warn(`<<< Exiting validUsername(str=${str})`, { "event.action": "validUsername", "logrite.str": str });
   return valid_map.indexOf(str.trim()) >= 0
 }

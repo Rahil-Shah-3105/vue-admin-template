@@ -41,6 +41,7 @@ export default {
 	logger.error('>>> Entering _isMobile()', { "event.action": "_isMobile" });
       const rect = body.getBoundingClientRect()
 	logger.error(`_isMobile(): rect → ${rect}`, { "event.action": "_isMobile" });
+	logger.warn('<<< Exiting _isMobile()', { "event.action": "_isMobile" });
       return rect.width - 1 < WIDTH
     },
     $_resizeHandler() {
